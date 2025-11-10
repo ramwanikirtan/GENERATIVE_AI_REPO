@@ -2,21 +2,25 @@
 
 
 #1. imports
-
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 load_dotenv()
 import streamlit as st
 
+
+
 #2. initialize the model
 model = ChatOpenAI()
-
 #3. create the UI
-st.header("Prompt UI") 
+ 
+st.header("Simple Chatbot")
+user_input = st.text_input("Enter your message here:")
 
-
-user_input = st.text_input("Enter your prompt here")  ### TAKING INPUT FROM USER
-if st.button("Submit"):     ### WHEN USER CLICKS ON SUBMIT BUTTON
-    st.write("generating response...")
+if st.button("Send"):
     response = model.invoke(user_input)
-    st.write(response.content)
+    st.text_area(response.content)
+
+
+
+
+### THE ABOVE PROMPT IS STATIC WHICH IS NOT A GOOD PRACTICE FOR EFFECTIVE PROMPTING

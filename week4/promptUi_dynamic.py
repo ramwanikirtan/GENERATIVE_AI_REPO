@@ -6,7 +6,7 @@
 
 #1. imports
 from langchain_openai import ChatOpenAI
-from langchain_core.prompts import PromptTemplate,load_prompt
+from langchain_core.prompts import PromptTemplate, load_prompt
 from dotenv import load_dotenv  
 load_dotenv()
 import streamlit as st
@@ -31,9 +31,9 @@ length_input = st.selectbox(
 
 ## create the prompt template
 
+## template = load_prompt("research_paper_summarizer.json")  ## see how much easier it is to load the prompt from json file
+
 template = load_prompt("research_paper_summarizer.json")  ## see how much easier it is to load the prompt from json file
-
-
 
 ## get the final prompt by filling the input variables in the template
 final_prompt = template.invoke(
@@ -47,6 +47,6 @@ final_prompt = template.invoke(
 ## send the final prompt to the model and get the response
 
 if st.button("Submit"):
-    st.write("generating response...")
-    response = model.invoke(final_prompt)
-    st.write(response.content)
+    st.write("Generating summary...")
+    result = model.invoke(final_prompt)
+    st.write("Summary:", result.content)
